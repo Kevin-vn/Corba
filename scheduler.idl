@@ -1,0 +1,19 @@
+module fr_upem_scheduler {
+
+	struct Request {
+		string request_object;
+		string request_interface;
+		string request_operation;
+		sequence<any> ParameterList;
+	};
+	
+	exception unknown_values { string message; };
+	
+	interface Scheduler {
+		boolean postRequest(in Request r);
+		Request getRequest(in short index);
+		boolean checkValues(in Request r) raises(unknown_values);
+		void removeRequest(in short index);
+	};
+
+};
